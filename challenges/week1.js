@@ -55,7 +55,7 @@ function reverseWord(word) {
 }
 
 function reverseAllWords(words) {
-  if (words === undefined) throw new Error("words is required");
+if (words === undefined) throw new Error("words is required");
   // Add your code here!var splitString = word.split("");
  let newArray = words.map(reverseWord)
  return newArray
@@ -83,11 +83,27 @@ function addScore(score) {
 scores.forEach(addScore)
  return Math.round(total/scores.length*100)/100;
 }
-
 function simpleFizzBuzz(n) {
-  if (n === undefined) throw new Error("n is required");
+if (n === undefined) throw new Error("n is required");
   // Add your code here!
+  let isDivisibleBy5 = n % 5 === 0;
+  let isDivisibleBy3 = n % 3 === 0;
+  if(isDivisibleBy3 && isDivisibleBy5) {
+  return 'fizzbuzz' 
+  }
+  if(isDivisibleBy5){
+    return 'buzz'
   
+  }
+  if(isDivisibleBy3){
+    return 'fizz'
+  }
+  if(isDivisibleBy5){
+   return 'buzz'
+  }
+  else {
+  return n
+  }
   }
 
 module.exports = {

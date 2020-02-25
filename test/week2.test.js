@@ -133,7 +133,7 @@ describe("hasMPostCode", () => {
   });
 
   test("returns false if the postcode starts with M but is not for Manchester", () => {
-    const person = {
+    const person1 = {
       name: "Jahin",
       age: 55,
       address: {
@@ -142,6 +142,6 @@ describe("hasMPostCode", () => {
         postCode: "ME20 5BR"
       }
     };
-    expect(hasMPostCode(person)).toBe(false);
+    expect(hasMPostCode(person1)).toBe(false);
   });
 });
