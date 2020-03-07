@@ -53,12 +53,13 @@ function duplicateNumbers(arr1, arr2) {
   // Your code here!
   let arrayNew = []
   for (let i = 0; i < arr1.length; i++) {
-    if (arr2.includes(arr1[i])){
-arrayNew.push(arr1[i])
+    if (arr2.includes(arr1[i])) {
+      arrayNew.push(arr1[i])
     }
   }
   return arrayNew.sort().filter(function (value, index) {
-    return arrayNew.indexOf(value) === index;})
+    return arrayNew.indexOf(value) === index;
+  })
 }
 
 module.exports = {
