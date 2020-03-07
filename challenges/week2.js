@@ -1,10 +1,7 @@
 function getFillings(sandwich) {
   if (sandwich === undefined) throw new Error("ingredients is required");
   // Your code here!
-  //loop through and array
-  for (let i = 0; i < sandwich.lenght; i++);
-  //find filling
-  return sandwich.fillings
+    return sandwich.fillings
   //return the filling
 }
 
