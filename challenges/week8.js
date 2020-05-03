@@ -1,10 +1,13 @@
 const findNextNumber = (nums, n) => {
-  for (let i = 0; i < array.length; i++) {
-    return array[i + 1]
-  }
-
   if (nums === undefined) throw new Error("nums is required");
   if (n === undefined) throw new Error("n is required");
+  // Your code here!
+  for (let i = 0; i < nums.length - 1; i++) {
+    if (nums[i] == n) {
+      return nums[i + 1]
+    }
+  }
+  return null;
   // Your code here!
 };
 
@@ -43,7 +46,13 @@ const sumArrays = arrs => {
 }
 
 const arrShift = arr => {
-  if ([arr[0], arr[arr.length - 1]] = [arr[arr.length - 1], arr[0]]);
+  if (arr.length < 2) {
+    return arr;
+  }
+  let first = arr.shift();
+  let last = arr.pop();
+  arr.push(first);
+  arr.unshift(last);
   return arr;
 };
 
@@ -51,17 +60,31 @@ const findNeedle = (haystack, searchTerm) => {
   if (haystack === undefined) throw new Error("haystack is required");
   if (searchTerm === undefined) throw new Error("searchTerm is required");
   // Your code here!
-      for (let i = 0; i < haystack.length; i++){
-     if (haystack[i] === searchTerm) {
+  let searchTermLC = searchTerm.toLowerCase();
+  for (let property in haystack){
+    let value = String(haystack[property]);
+    if (value.toLowerCase().indexOf(searchTermLC) !== -1) {
        return true;
-     }
-   }
-   return false;
-   };
+    }
+  }
+  return false;
+};
 
 
 const getWordFrequencies = str => {
   if (str === undefined) throw new Error("str is required");
+  let frequencies = {};
+
+  let words = str.split(" ");
+  for (let i = 0; i < words.length; i += 1) {
+    let word = words[i].toLowerCase();
+    let stripped = word.replace(/[!,?]/g, '')
+    if (!frequencies[stripped]) {
+      frequencies[stripped] = 0;
+    }
+    frequencies[stripped]++;
+  }
+  return frequencies;
   // Your code here!
 };
 
