@@ -11,7 +11,7 @@ function camelCaseWords(words) {
   if (words === undefined) throw new Error("words is required");
   // Your code here!
   let wordCount = ''
-  words.forEach((word) => {
+  words.forEach(function(word) {
     if (wordCount === '') {
       wordCount = word.toLowerCase()
     }
