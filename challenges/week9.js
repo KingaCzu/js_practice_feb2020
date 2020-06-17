@@ -25,8 +25,8 @@ const isValidDNA = str => {
   if (typeof str !== "string") throw new Error("str is required");
 
   let validLetters = ["G", "C", "T", "A"];
-  return str.toUpperCase().split(' ').every(char => validLetters.includes(char));
-};
+ return str.toUpperCase().split('').every(char => validLetters.includes(char));
+  };
 
 /**
  * This function will receive a valid DNA string (see above) and should return a string of the complementary base pairs. In DNA, T always pairs with A, and C always pairs with G. So a string of "ACTG" would have a complementary DNA string of "TGAC".
@@ -78,10 +78,10 @@ const createMatrix = (n, fill) => {
   if (fill === undefined) throw new Error("fill is required");
   let newArray = [];
   for (let i = 0; i < n; i++) {
-    newArray.push(Array(n).fill(fill))   
-  } 
-    return newArray;
-  };
+    newArray.push(Array(n).fill(fill))
+  }
+  return newArray;
+};
 
 
 
@@ -104,7 +104,13 @@ const areWeCovered = (staff, day) => {
   if (day === undefined) throw new Error("day is required");
   if (staff.length === 0) {
     return false;
-   }
+  } else {
+    return staff.filter((allDays) => allDays.rota.includes(day)).length >= 3;
+  }
+}
+
+
+
 
 module.exports = {
   sumMultiples,

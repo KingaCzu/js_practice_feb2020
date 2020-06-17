@@ -4,6 +4,11 @@
  */
 const sumDigits = n => {
   if (n === undefined) throw new Error("n is required");
+  let sum = 0;
+  for (let i = 0; i < n.length; i++) {
+  sum += parseInt(n[i])
+  }
+  return sum;
 };
 
 /**
@@ -17,7 +22,13 @@ const sumDigits = n => {
 const createRange = (start, end, step) => {
   if (start === undefined) throw new Error("start is required");
   if (end === undefined) throw new Error("end is required");
+  let newRange = [];
+  for (let i = start; i <= end; i+ step) {
+      newRange.push(i);
+  }
+  return newRange;
 };
+
 
 /**
  * This function takes an array of user objects and their usage in minutes of various applications. The format of the data should be as follows:
@@ -87,4 +98,5 @@ module.exports = {
   getScreentimeAlertList,
   hexToRGB,
   findWinner
-};
+}
+

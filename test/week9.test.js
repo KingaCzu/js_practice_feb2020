@@ -37,8 +37,8 @@ describe("isValidDNA", () => {
     test("returns true if contains characters C, G, T or A only", () => {
         expect(isValidDNA("CGTA")).toBe(true);
         expect(isValidDNA("CGTACGTA")).toBe(true);
-        expect(isValidDNA("CTA").toBe(true));
-        expect("TAAGGE").toBE(true);
+        expect(isValidDNA("CTA")).toBe(true);
+        expect(isValidDNA("TAAGG")).toBe(true);
     });
     test("returns false if contains characters other than C, G, T or A", () => {
         expect(isValidDNA("CGTAH")).toBe(false);
@@ -83,7 +83,7 @@ describe("isValidDNA", () => {
 
             describe("createMatrix", () => {
                 it("returns a matrix of 1 * 1 when passed 1", () => {
-                    const result = createMatrix(1);
+                    const result = createMatrix(1, "foo");
                     const expected = [["foo"]];
                     expect(result).toEqual(expected);
                 });
