@@ -62,14 +62,24 @@ const createRange = (start, end, step) => {
 const getScreentimeAlertList = (users, date) => {
   if (users === undefined) throw new Error("users is required");
   if (date === undefined) throw new Error("date is required");
-  newRange = []
-  for (let i = 0; i <users.length; i++) {
-    for (let j = 0; j < screenTime.length; j++) {
-      if (totalTime === date && sumScreenTime > 100) {
-      newRange.push(user.username)
+  let alerts = [];
+  for (let i = 0; i < users.length; i++) {
+    let user = users[i];
+    let sumScreenTime = 0;
+    for (let j = 0; j < user.screenTime.length; j++) {
+      let screenTime = user.screenTime[j];
+      if (screenTime.date === date) {
+        let usage = screenTime.usage;
+        for (let application in usage) {
+          sumScreenTime += usage[application];
+        }
+      }
     }
-return newRange;
-};
+    if (sumScreenTime > 100) {
+      alerts.push(user.username)
+    }
+  }
+  return alerts;
 };
 
 /**
@@ -84,6 +94,15 @@ return newRange;
  */
 const hexToRGB = hexStr => {
   if (hexStr === undefined) throw new Error("hexStr is required");
+  let numbers = [];
+  for (let startIndex = 1; startIndex < hexStr.length; startIndex += 2) {
+    numbers.push(hexStr.slice(startIndex, startIndex + 2));
+  }
+  return numbers.map(function (number) {
+    let newNumber = parseInt(number, 16);
+    if (isNaN(newNumber)) throw new Error("invalid hex number " + number);
+    return newNumber;
+  });
 };
 
 /**
@@ -98,7 +117,53 @@ const hexToRGB = hexStr => {
  */
 const findWinner = board => {
   if (board === undefined) throw new Error("board is required");
+// horizontal
+for (let row = 0; row < board.length; row++) {
+  if (board[row].length !== 3) throw new Error("width of the board should be 3 colums in each row");
+  let numX = 0;
+  let num0 = 0;
+  for (let col = 0; col < board[row].length; col++) {
+    if (board[row][col] === "X") numX++;
+    if (board[row][col] === "0") num0++;
+  }
+  if (numX === 3) return "X";
+  if (num0 === 3) return "0";
+}
+
+// vertical 
+for (let col = 0; col < board[0].length; col++) {
+  let numX = 0;
+  let num0 = 0;
+  for (let row = 0; row < board.length; row++) {
+    if (board[row][col] === "X") numX++;
+    if (board[row][col] === "0") num0++;
+  }
+  if (numX === 3) return "X";
+  if (num0 === 3) return "0";
+}
+
+// diagonal top-left to bottom right
+let numX = 0;
+let num0 = 0;
+for (let row = 0; row < board.length; row++) {
+  if (board[row][row] === "X") numX++;
+  if (board[row][row] === "0") num0++;
+}
+if (numX === 3) return "X";
+if (num0 === 3) return "0";
+
+// diagonal top-left to bottom right
+numX = 0;
+num0 = 0;
+for (let row = 0; row < board.length; row++) {
+  if (board[row][2 - row] === "X") numX++;
+  if (board[row][2 - row] === "0") num0++;
+}
+if (numX === 3) return "X";
+if (num0 === 3) return "0";
+return null;
 };
+
 
 module.exports = {
   sumDigits,

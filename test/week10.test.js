@@ -1,4 +1,4 @@
-const { sumDigits, createRange, getScreentimeAlertList, hexToRGB } = require("../challenges/week10");
+const { sumDigits, createRange, getScreentimeAlertList, hexToRGB, findWinner } = require("../challenges/week10");
 
 describe("sumDigits", () => {
     test("it throws an error if not passed a number", () => {
@@ -27,7 +27,7 @@ describe("sumDigits", () => {
 
          test("returns array with range of numbers", () => {
                 expect(createRange(3, 9, 2)).toEqual([3, 5, 7, 9]);
-                expect(createRange(1, 15, 5)).toEqual([1, 5, 10, 15]);
+                expect(createRange(1, 16, 5)).toEqual([1, 6, 11, 16]);
             });
         });
 
@@ -70,7 +70,7 @@ describe("sumDigits", () => {
             ]
     
             expect(getScreentimeAlertList(users, "2019-05-02")).toEqual(["beth_1234"]);
-            expect(getScreentimeAlertList(users, "2019-06-04")).toEqual(["beth_1234"]);
+            expect(getScreentimeAlertList(users, "2019-06-04")).toEqual([]);
             expect(getScreentimeAlertList(users, "2019-06-15")).toEqual(["beth_1234", "sam_j_1989"]);
         });
     });
@@ -82,8 +82,49 @@ describe("sumDigits", () => {
         });
            
         test("it transforms the hex code into an RGB code format", () => {
-            expect(hexToRGB()).toEqual()
-            expect(hexToRGB()).toEqual()
+            expect(hexToRGB('#AABBCC')).toEqual([170, 187, 204]);
+            expect(hexToRGB('#DDEEFF')).toEqual([221, 238, 255]);
         });
     });
-});
+    describe("findWinner", () => {
+        const boards = [
+           [
+             ["X",  "0",  "X"],
+             ["X", null,  "0"],
+             ["X", null,  "0"]
+           ],
+           [
+             ["0",  "X", null],
+             ["X",  "0", null],
+             ["X", null,  "0"]
+           ],
+           [
+             ["X",  "X",   "X"],
+             ["0",  null, null],
+             ["X",  "0",   "0"]
+           ],
+           [
+             ["X",  "0",  "X"],
+             ["X",  "X",  "0"],
+             ["0",  "X",  "0"]
+           ], 
+           [
+             [null,  null,  null],
+             [null,  null,  null],
+             [null,  null,  null]
+           ]];
+        test("It throws an error if board is not provided", () => {
+            expect(() => {
+                findWinner();
+            }).toThrow("board is required");
+        });
+           
+        test("It gets the winner", () => {
+            expect(findWinner(boards[0])).toEqual("X");
+            expect(findWinner(boards[1])).toEqual("0");
+            expect(findWinner(boards[2])).toEqual("X");
+            expect(findWinner(boards[3])).toEqual(null);
+            expect(findWinner(boards[4])).toEqual(null);
+        });
+    });
+})
